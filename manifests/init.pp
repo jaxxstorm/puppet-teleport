@@ -127,6 +127,12 @@ class teleport (
 ) inherits teleport::params {
 
   validate_array($auth_servers)
+  validate_bool($auth_enable)
+  validate_bool($ssh_enable)
+  validate_bool($proxy_enable)
+  validate_bool($manage_service)
+  validate_re($service_ensure, '^(running|stopped)$')
+  validate_bool($service_enable)
 
   anchor { 'teleport_first': }
   ->
