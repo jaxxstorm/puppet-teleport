@@ -13,7 +13,7 @@ class teleport::config {
   
     case $teleport::init_style {
       'systemd': {
-      	file { '/lib/systemd/system/teleport.service':
+        file { '/lib/systemd/system/teleport.service':
           mode    => '0644',
           owner   => 'root',
           group   => 'root',
@@ -23,17 +23,18 @@ class teleport::config {
           command     => 'systemctl daemon-reload',
           path        => [ '/usr/bin', '/bin', '/usr/sbin' ],
           refreshonly => true,
-        } 
+        }
       }
+      default: { fail('OS not supported') }
     }
   }
 
   file { $teleport::config_path:
-    ensure   => present,
-    owner    => 'root',
-    group    => 'root',
-    mode     => '0555',
-    content  => template('teleport/teleport.yaml.erb')
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0555',
+    content => template('teleport/teleport.yaml.erb')
   }
 
 }
