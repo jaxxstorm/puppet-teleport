@@ -1,0 +1,13 @@
+[Unit]
+Description=Teleport SSH Service
+Wants=basic.target
+After=basic.target network.target
+
+[Service]
+ExecStart=<%= scope.lookupvar('teleport::bin_dir') %>/teleport start --config=<%= scope.lookupvar('teleport::config_path') %>
+KillMode=process
+Restart=on-failure
+RestartSec=42s
+
+[Install]
+WantedBy=multi-user.target
