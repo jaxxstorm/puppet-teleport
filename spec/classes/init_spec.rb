@@ -71,7 +71,7 @@ describe 'teleport' do
       :auth_listen_port => '8888',
 
     }}
-    it { should contain_file('/etc/teleport.yaml').with_content(/auth_service:\n    enabled: true\n    listen_addr: 0.0.0.0:8888\n/) }
+    it { should contain_file('/etc/teleport.yaml').with_content(/auth_service:\n  enabled: true\n  listen_addr: 0.0.0.0:8888\n/) }
   end
 
   context "when configuring ssh service" do
@@ -81,7 +81,17 @@ describe 'teleport' do
       :ssh_listen_port => '8888',
 
     }}
-    it { should contain_file('/etc/teleport.yaml').with_content(/ssh_service:\n    enabled: false\n    listen_addr: 0.0.0.0:8888\n/) }  
+    it { should contain_file('/etc/teleport.yaml').with_content(/ssh_service:\n  enabled: false\n  listen_addr: 0.0.0.0:8888\n/) }  
+  end
+
+  context "when enabling SSL for proxy" do
+    let (:params) {{
+      :proxy_ssl => true,
+      :proxy_ssl_key => '/var/ssl/teleport.key',
+      :proxy_ssl_cert => '/var/ssl/teleport.crt',
+    }}
+
+    it { should contain_file('/etc/teleport.yaml').with_content(/https_key_file: \/var\/ssl\/teleport.key\n  https_cert_file: \/var\/ssl\/teleport.crt\n/) }
   end
 
   context "when configuring proxy service" do
@@ -91,7 +101,21 @@ describe 'teleport' do
       :proxy_listen_port => '8888',
 
     }}
-    it { should contain_file('/etc/teleport.yaml').with_content(/proxy_service:\n    enabled: true\n    listen_addr: 0.0.0.0:8888\n/) }
+    it { should contain_file('/etc/teleport.yaml').with_content(/proxy_service:\n  enabled: true\n  listen_addr: 0.0.0.0:8888\n/) }
+  end
+
+  context "when configuring labels" do
+    let (:params) {{
+      :labels => { 'role' => 'test_role', 'data' => 'test_data' }
+    }}
+    it { should contain_file('/etc/teleport.yaml').with_content(/labels:\n    data: test_data\n    role: test_role/) }
+  end
+
+  context "when listing auth servers" do
+    let (:params) {{
+      :auth_servers => [ '127.0.0.1:3030', '0.0.0.0:3030' ]
+    }}
+    it { should contain_file('/etc/teleport.yaml').with_content(/auth_servers:\n    - 127.0.0.1:3030\n    - 0.0.0.0:3030\n/) }
   end
 
   ##### Service setup ####
@@ -121,6 +145,10 @@ describe 'teleport' do
   context "if not managing service" do
   	let(:params) {{ :manage_service => false }}
     it { should_not contain_service('teleport') } 
+  end
+
+  context "config file notifies service" do
+    it { should contain_file('/etc/teleport.yaml').that_notifies('Service[teleport]') }
   end
 
 

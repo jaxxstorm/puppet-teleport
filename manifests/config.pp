@@ -34,6 +34,7 @@ class teleport::config {
     owner   => 'root',
     group   => 'root',
     mode    => '0555',
+    notify  => Service['teleport'],
     content => template('teleport/teleport.yaml.erb')
   }
 
