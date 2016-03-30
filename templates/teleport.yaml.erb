@@ -44,3 +44,9 @@ proxy_service:
     enabled: <%= scope.lookupvar('teleport::proxy_enable') %>
     listen_addr: <%= scope.lookupvar('teleport::proxy_listen_addr') -%>:<%= scope.lookupvar('teleport::proxy_listen_port') %>
     web_listen_addr: <%= scope.lookupvar('teleport::proxy_web_listen_addr') -%>:<%= scope.lookupvar('teleport::proxy_web_listen_port') %>
+    <% if scope.lookupvar('teleport::proxy_ssl') == true -%>
+    # TLS certificate for the server-side HTTPS connection.
+    # Configuring these properly is critical for Teleport security.
+    https_key_file: <%= scope.lookupvar('teleport::proxy_ssl_key') %>
+    https_cert_file: <%= scope.lookupvar('teleport::proxy_ssl_cert') %>
+    <% end -%>

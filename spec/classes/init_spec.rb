@@ -84,6 +84,16 @@ describe 'teleport' do
     it { should contain_file('/etc/teleport.yaml').with_content(/ssh_service:\n    enabled: false\n    listen_addr: 0.0.0.0:8888\n/) }  
   end
 
+  context "when enabling SSL for proxy" do
+    let (:params) {{
+      :proxy_ssl => true,
+      :proxy_ssl_key => '/var/ssl/teleport.key',
+      :proxy_ssl_cert => '/var/ssl/teleport.crt',
+    }}
+
+    it { should contain_file('/etc/teleport.yaml').with_content(/https_key_file: \/var\/ssl\/teleport.key\n    https_cert_file: \/var\/ssl\/teleport.crt\n/) }
+  end
+
   context "when configuring proxy service" do
     let (:params) {{
       :proxy_enable => true,

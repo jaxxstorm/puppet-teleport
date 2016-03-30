@@ -83,6 +83,16 @@
 # [*proxy_web_listen_port*]
 #  Port to listen on for web proxy connections
 #
+# [*proxy_ssl*]
+#  Enable or disable SSL support
+#  Default is false
+#
+# [*proxy_ssl_key*]
+#  Path to SSL key for proxy
+#
+# [*proxy_ssl_cert*]
+#  Path to SSL cert for proxy
+#
 # [*init_style*]
 #  Which init system to use to start the service. Currently only
 #  systemd is supported
@@ -120,6 +130,9 @@ class teleport (
   $proxy_listen_port     = '3023',
   $proxy_web_listen_addr = '127.0.0.1',
   $proxy_web_listen_port = '3080',
+  $proxy_ssl             = false,
+  $proxy_ssl_key         = undef,
+  $proxy_ssl_cert        = undef,
   $init_style            = $teleport::params::init_style,
   $manage_service        = true,
   $service_ensure        = 'running',
@@ -130,6 +143,7 @@ class teleport (
   validate_bool($auth_enable)
   validate_bool($ssh_enable)
   validate_bool($proxy_enable)
+  validate_bool($proxy_ssl)
   validate_bool($manage_service)
   validate_re($service_ensure, '^(running|stopped)$')
   validate_bool($service_enable)
