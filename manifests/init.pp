@@ -108,7 +108,7 @@ class teleport (
   $log_dest              = 'stderr',
   $log_level             = 'ERROR',
   $config_path           = $teleport::params::config_path,
-  $auth_servers          = [ '127.0.0.1:3025' ],
+  $auth_servers          = ['127.0.0.1:3025'],
   $auth_enable           = false,
   $auth_listen_addr      = '127.0.0.1',
   $auth_listen_port      = '3025',
@@ -125,6 +125,8 @@ class teleport (
   $service_ensure        = 'running',
   $service_enable        = true
 ) inherits teleport::params {
+
+  validate_array($auth_servers)
 
   anchor { 'teleport_first': }
   ->

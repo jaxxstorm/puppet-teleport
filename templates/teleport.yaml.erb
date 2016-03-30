@@ -6,40 +6,41 @@
 teleport:
     # nodename allows to assign an alternative name this node can be reached by.
     # by default it's equal to hostname
-    nodename: <%= @nodename %>
+    nodename: <%= scope.lookupvar('teleport::nodename') %>
 
     # list of auth servers in a cluster. you will have more than one auth server
     # if you configure teleport auth to run in HA configuration
     auth_servers: 
-        <%- @auth_servers.each do |auth_server| -%>
-        - <%= auth_server %>
-        <%- end -%>
+        <% scope.lookupvar('teleport::auth_servers').flatten.each do |server| -%>
+        - <%= server %>
+        <% end -%>
+
 
     # Teleport throttles all connections to avoid abuse. These settings allow
     # you to adjust the default limits
     connection_limits:
-        max_connections: <%= @max_connections %>
-        max_users: <%= @max_users %>
+        max_connections: <%= scope.lookupvar('teleport::max_connections') %>
+        max_users: <%= scope.lookupvar('teleport::max_users') %>
 
 
     # Logging configuration. Possible output values are 'stdout', 'stderr' and 
     # 'syslog'. Possible severity values are INFO, WARN and ERROR (default).
     log:
-        output: <%= @log_dest %>
-        severity: <%= @log_level %>
+        output: <%= scope.lookupvar('teleport::log_dest') %>
+        severity: <%= scope.lookupvar('teleport::log_level') %>
 
 # This section configures the 'auth service':
 auth_service:
-    enabled: <%= @auth_enable %>
-    listen_addr: <%= @auth_listen_addr -%>:<%= @auth_listen_port %>
+    enabled: <%= scope.lookupvar('teleport::auth_enable') %>
+    listen_addr: <%= scope.lookupvar('teleport::auth_listen_addr') -%>:<%= scope.lookupvar('teleport::auth_listen_port') %>
 
 # This section configures the 'node service':
 ssh_service:
-    enabled: <%= @ssh_enable %>
-    listen_addr: <%= @ssh_listen_addr -%>:<%= @ssh_listen_port %>
+    enabled: <%= scope.lookupvar('teleport::ssh_enable') %>
+    listen_addr: <%= scope.lookupvar('teleport::ssh_listen_addr') -%>:<%= scope.lookupvar('teleport::ssh_listen_port') %>
 
 # This section configures the 'proxy service'
 proxy_service:
-    enabled: <%= @proxy_enable %>
-    listen_addr: <%= @proxy_listen_addr -%>:<%= @proxy_listen_port %>
-    web_listen_addr: <%= @proxy_web_listen_addr -%>:<%= @proxy_web_listen_port %>
+    enabled: <%= scope.lookupvar('teleport::proxy_enable') %>
+    listen_addr: <%= scope.lookupvar('teleport::proxy_listen_addr') -%>:<%= scope.lookupvar('teleport::proxy_listen_port') %>
+    web_listen_addr: <%= scope.lookupvar('teleport::proxy_web_listen_addr') -%>:<%= scope.lookupvar('teleport::proxy_web_listen_port') %>
