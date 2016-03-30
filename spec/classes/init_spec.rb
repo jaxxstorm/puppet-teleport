@@ -133,6 +133,10 @@ describe 'teleport' do
     it { should_not contain_service('teleport') } 
   end
 
+  context "config file notifies service" do
+    it { should contain_file('/etc/teleport.yaml').that_notifies('Service[teleport]') }
+  end
+
 
 
 end
