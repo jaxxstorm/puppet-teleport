@@ -67,6 +67,9 @@
 # [*ssh_listen_port*]
 #  Port to listen on for SSH connection
 #
+# [*labels*]
+#  A hash of labels to assign to hosts
+#
 # [*proxy_enable*]
 #  Where to start the proxy service
 #  Defaults to false
@@ -125,6 +128,7 @@ class teleport (
   $ssh_enable            = true,
   $ssh_listen_addr       = '0.0.0.0',
   $ssh_listen_port       = '3022',
+  $labels                = {},
   $proxy_enable          = false,
   $proxy_listen_addr     = '127.0.0.1',
   $proxy_listen_port     = '3023',
@@ -142,6 +146,7 @@ class teleport (
   validate_array($auth_servers)
   validate_bool($auth_enable)
   validate_bool($ssh_enable)
+  validate_hash($labels)
   validate_bool($proxy_enable)
   validate_bool($proxy_ssl)
   validate_bool($manage_service)
