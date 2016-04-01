@@ -25,6 +25,14 @@ class teleport::config {
           refreshonly => true,
         }
       }
+      'init': {
+      	file { '/etc/init.d/teleport':
+          mode    => '0555',
+          owner   => 'root',
+          group   => 'root',
+          content => template('teleport/teleport.init.erb')
+        } 
+      }
       default: { fail('OS not supported') }
     }
   }

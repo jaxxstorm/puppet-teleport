@@ -121,8 +121,8 @@ describe 'teleport' do
   ##### Service setup ####
   context "on unsupported operating system" do
     let (:facts) {{
-      :operatingsystem => 'CentOS',
-      :operatingsystemrelease => '6.5'
+      :operatingsystem => 'Debian',
+      :operatingsystemrelease => '8'
     }}
     it { expect { should compile }.to raise_error(/OS is currently/) }
   end
@@ -134,6 +134,15 @@ describe 'teleport' do
     }}
   	it { should contain_class('teleport').with_init_style('systemd') }
     it { should contain_file('/lib/systemd/system/teleport.service').with_content(/teleport start --config/) }
+  end
+
+  context "on RHEL 6 system" do
+    let (:facts) {{
+      :operatingsystem => "CentOS",
+      :operatingsystemrelease => '6.7'
+    }}
+    it { should contain_class('teleport').with_init_style('init') }
+    it { should contain_file('/etc/init.d/teleport').with_content(/start --config/) }
   end
 
   ### Service management ###
