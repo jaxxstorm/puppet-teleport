@@ -15,7 +15,7 @@ class teleport::params {
   case $::operatingsystem {
     'RedHat', 'CentOS': {
       if versioncmp($::operatingsystemrelease, '7.0') < 0 {
-        fail('OS is currently not supported')
+        $init_style  = 'init'
       } else {
         $init_style  = 'systemd'
       }
