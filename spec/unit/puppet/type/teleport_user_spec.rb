@@ -2,18 +2,18 @@ require 'puppet/type/teleport_user'
 
 describe Puppet::Type.type(:teleport_user) do
 
-	it 'should require a name' do
-		expect {
-			Puppet::Type.type(:teleport_user).new({})
-		}.to raise_error(Puppet::Error, 'Title or name must be provided')
-	end
+  it 'should require a name' do
+    expect {
+      Puppet::Type.type(:teleport_user).new({})
+    }.to raise_error(Puppet::Error, 'Title or name must be provided')
+  end
 
   context 'when creating a user' do
     before :each do
-    	@user = Puppet::Type.type(:teleport_user).new(:name => 'testing') 
+      @user = Puppet::Type.type(:teleport_user).new(:name => 'testing') 
     end
 
-		it 'should accept a user name' do
+    it 'should accept a user name' do
       expect(@user[:name]).to eq('testing')
     end
 
