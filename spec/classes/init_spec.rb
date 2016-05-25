@@ -18,8 +18,8 @@ describe 'teleport' do
 
   context "When installing via URL by default" do
     it { should contain_archive('/tmp/teleport.tar.gz').with(:source => 'https://github.com/gravitational/teleport/releases/download/v0.1.0-alpha.7/teleport-v0.1.0-alpha.7-linux-amd64-bin.tar.gz') }
-    it { should contain_file('/usr/local/bin/tctl').with(:ensure => 'link', :target => '/opt/teleport/build/tctl') }
-    it { should contain_file('/usr/local/share/teleport').with(:ensure => 'link', :target => '/opt/teleport/src/github.com/gravitational/teleport/web/dist') }
+    it { should contain_file('/usr/local/bin/tctl').with(:ensure => 'link', :target => '/opt/teleport-v0.1.0-alpha.7/teleport/build/tctl') }
+    it { should contain_file('/usr/local/share/teleport').with(:ensure => 'link', :target => '/opt/teleport-v0.1.0-alpha.7/teleport/src/github.com/gravitational/teleport/web/dist') }
   end
 
   context "When installing a special version" do
@@ -40,7 +40,7 @@ describe 'teleport' do
     let (:params) {{
       :bin_dir => "/usr/sbin"
     }}
-    it { should contain_file('/usr/sbin/tctl').with(:ensure => 'link', :target => '/opt/teleport/build/tctl') }
+    it { should contain_file('/usr/sbin/tctl').with(:ensure => 'link', :target => '/opt/teleport-v0.1.0-alpha.7/teleport/build/tctl') }
   end
 
   context "When specifying a different extract_path" do
