@@ -11,19 +11,19 @@ teleport:
 <% if ![:undef, nil].include?(scope.lookupvar("teleport::data_dir")) -%>
   # Data directory where Teleport keeps its data, like keys/users for 
   # authentication (if using the default BoltDB back-end)
-  data_dir: <%= scope.lookupvar('teleport::data_dir') %>
+  data_dir: <%= scope.lookupvar('teleport::data_dir') -%>
 <% end -%>
 
 <% if ![:undef, nil].include?(scope.lookupvar("teleport::auth_token")) -%>
   # Data directory where Teleport keeps its data, like keys/users for
   # authentication (if using the default BoltDB back-end)
-  auth_token: <%= scope.lookupvar('teleport::auth_token') %>
+  auth_token: <%= scope.lookupvar('teleport::auth_token') -%>
 <% end -%>
 
 <% if ![:undef, nil].include?(scope.lookupvar("teleport::advertise_ip")) -%>
   # Data directory where Teleport keeps its data, like keys/users for
   # authentication (if using the default BoltDB back-end)
-  advertise_ip: <%= scope.lookupvar('teleport::advertise_ip') %>
+  advertise_ip: <%= scope.lookupvar('teleport::advertise_ip') -%>
 <% end -%>
 
   # list of auth servers in a cluster. you will have more than one auth server
@@ -32,7 +32,6 @@ teleport:
 <% scope.lookupvar('teleport::auth_servers').flatten.each do |server| -%>
     - <%= server %>
 <% end -%>
-
 
   # Teleport throttles all connections to avoid abuse. These settings allow
   # you to adjust the default limits
