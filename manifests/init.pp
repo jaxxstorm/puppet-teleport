@@ -75,6 +75,10 @@
 # [*auth_listen_port*]
 #  Port to listen on for auth server
 #
+# [*auth_service_tokens*]
+#  The provisioning tokens for the auth tokens
+#  Defaults to an empty array
+#
 # [*ssh_enable*]
 #  Whether to start SSH service
 #  Defaults to true
@@ -148,6 +152,7 @@ class teleport (
   $auth_enable           = false,
   $auth_listen_addr      = '127.0.0.1',
   $auth_listen_port      = '3025',
+  $auth_service_tokens   = [],
   $ssh_enable            = true,
   $ssh_listen_addr       = '0.0.0.0',
   $ssh_listen_port       = '3022',
@@ -175,6 +180,7 @@ class teleport (
   validate_bool($manage_service)
   validate_re($service_ensure, '^(running|stopped)$')
   validate_bool($service_enable)
+  validate_array($auth_service_tokens)
 
   anchor { 'teleport_first': }
   ->

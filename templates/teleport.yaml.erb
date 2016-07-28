@@ -56,6 +56,12 @@ teleport:
 auth_service:
   enabled: <%= scope.lookupvar('teleport::auth_enable') %>
   listen_addr: <%= scope.lookupvar('teleport::auth_listen_addr') -%>:<%= scope.lookupvar('teleport::auth_listen_port') %>
+<% unless scope.lookupvar('teleport::auth_service_tokens').empty? -%>
+  tokens:
+<% scope.lookupvar('teleport::auth_service_tokens').flatten.each do |token| -%>
+    - <%= token %>
+<% end -%>
+<% end -%>
 
 # This section configures the 'node service':
 ssh_service:
