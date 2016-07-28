@@ -23,6 +23,25 @@
 #  Teleport nodename. 
 #  Defaults to $::fqdn fact
 #
+# [*data_dir*]
+#  Teleport data directory
+#  Defaults to undef (meaning teleport uses its
+#  default of '/var/lib/teleport')
+#
+# [*auth_token*]
+#  The auth token to use when joining the cluster
+#  Defaults to undef
+#
+# [*advertise_ip*]
+#  When running in NAT'd environments, designates
+#  an IP for teleport to advertise.
+#  Defaults to undef
+#
+# [*storage_backend*]
+#  Which storage backend to use.
+#  Defaults to undef (meaning teleport uses its
+#  default of boltdb
+#
 # [*max_connections*]
 #  Configure max connections for teleport
 #  Defaults to 100
@@ -116,6 +135,10 @@ class teleport (
   $bin_dir               = $teleport::params::bin_dir,
   $assets_dir            = $teleport::params::assets_dir,
   $nodename              = $teleport::params::nodename,
+  $data_dir              = undef,
+  $auth_token            = undef,
+  $advertise_ip          = undef,
+  $storage_backend       = undef,
   $max_connections       = 1000,
   $max_users             = 250,
   $log_dest              = 'stderr',
