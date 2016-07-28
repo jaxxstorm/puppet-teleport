@@ -21,7 +21,7 @@ describe 'teleport' do
       :version => 'v0.1.0-alpha.7'
     }}
     it { should contain_archive('/tmp/teleport.tar.gz').with(:source => 'https://github.com/gravitational/teleport/releases/download/v0.1.0-alpha.7/teleport-v0.1.0-alpha.7-linux-amd64-bin.tar.gz') }
-    it { should contain_file('/usr/local/bin/tctl').with(:ensure => 'link', :target => '/opt/teleport-v0.1.0-alpha.7/teleport/build/tctl') }
+    it { should contain_file('/usr/local/bin/tctl').with(:ensure => 'link', :target => '/opt/teleport-v0.1.0-alpha.7/teleport/tctl') }
     it { should contain_file('/usr/local/share/teleport').with(:ensure => 'link', :target => '/opt/teleport-v0.1.0-alpha.7/teleport/src/github.com/gravitational/teleport/web/dist') }
   end
 
@@ -45,7 +45,7 @@ describe 'teleport' do
       :version => 'v0.1.0-alpha.7',
       :bin_dir => "/usr/sbin"
     }}
-    it { should contain_file('/usr/sbin/tctl').with(:ensure => 'link', :target => '/opt/teleport-v0.1.0-alpha.7/teleport/build/tctl') }
+    it { should contain_file('/usr/sbin/tctl').with(:ensure => 'link', :target => '/opt/teleport-v0.1.0-alpha.7/teleport/tctl') }
   end
 
   context "When specifying a different extract_path" do
@@ -53,8 +53,8 @@ describe 'teleport' do
       :extract_path => "/var/tmp"
     }}
     it { should contain_file('/var/tmp').with(:ensure => 'directory') }
-    it { should contain_file('/usr/local/bin/tctl').with(:ensure => 'link', :target => '/var/tmp/teleport/build/tctl') }
-    it { should contain_file('/usr/local/share/teleport').with(:ensure => 'link', :target => '/var/tmp/teleport/src/github.com/gravitational/teleport/web/dist') }
+    it { should contain_file('/usr/local/bin/tctl').with(:ensure => 'link', :target => '/var/tmp/teleport/tctl') }
+    it { should contain_file('/usr/local/share/teleport').with(:ensure => 'link', :target => '/var/tmp/teleport/app') }
   end
 
   #### Config ####
