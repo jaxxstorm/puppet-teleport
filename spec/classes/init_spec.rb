@@ -123,6 +123,13 @@ describe 'teleport' do
     it { should contain_file('/etc/teleport.yaml').with_content(/auth_servers:\n    - 127.0.0.1:3030\n    - 0.0.0.0:3030\n/) }
   end
 
+  context "when defining auth tokens" do
+    let (:params) {{
+      :auth_service_tokens => [ 'node:VMU0mF8GbN' ]
+    }}
+    it { should contain_file('/etc/teleport.yaml').with_content(/tokens:\n    - node:VMU0mF8GbN\n/) }
+  end
+
   ##### Service setup ####
   context "on unsupported operating system" do
     let (:facts) {{
