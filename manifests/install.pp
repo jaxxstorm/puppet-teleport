@@ -13,21 +13,21 @@ class teleport::install {
     extract      => true,
     extract_path => $teleport::extract_path,
     source       => "https://github.com/gravitational/teleport/releases/download/${teleport::version}/teleport-${teleport::version}-linux-amd64-bin.tar.gz",
-    creates      => "${teleport::extract_path}/teleport/build"
+    creates      => "${teleport::extract_path}/teleport"
   } ->
   file {
     "${teleport::bin_dir}/tctl":
       ensure => link,
-      target => "${teleport::extract_path}/teleport/build/tctl";
+      target => "${teleport::extract_path}/teleport/tctl";
     "${teleport::bin_dir}/teleport":
       ensure => link,
-      target => "${teleport::extract_path}/teleport/build/teleport";
+      target => "${teleport::extract_path}/teleport/teleport";
     "${teleport::bin_dir}/tsh":
       ensure => link,
-      target => "${teleport::extract_path}/teleport/build/tsh";
-    $teleport::data_dir:
+      target => "${teleport::extract_path}/teleport/tsh";
+    $teleport::assets_dir:
       ensure => link,
-      target => "${teleport::extract_path}/teleport/src/github.com/gravitational/teleport/web/dist"
+      target => "${teleport::extract_path}/teleport/app"
   }
 
 

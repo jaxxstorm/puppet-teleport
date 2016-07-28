@@ -10,7 +10,7 @@
 class teleport::config {
 
   if $teleport::init_style {
-  
+
     case $teleport::init_style {
       'systemd': {
         file { '/lib/systemd/system/teleport.service':

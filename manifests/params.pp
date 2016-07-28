@@ -3,12 +3,12 @@
 # This class is meant to be called from the main class
 # It sets variables according to platform
 class teleport::params {
-  
-  $version         = 'v0.1.0-alpha.7'
+
+  $version         = 'v1.0.0'
   $archive_path    = '/tmp/teleport.tar.gz'
-  $extract_path    = '/opt'
+  $extract_path    = "/opt/teleport-${version}"
   $bin_dir         = '/usr/local/bin'
-  $data_dir        = '/usr/local/share/teleport'
+  $assets_dir      = '/usr/local/share/teleport'
   $config_path     = '/etc/teleport.yaml'
   $nodename        = $::fqdn
 
