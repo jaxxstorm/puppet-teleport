@@ -25,7 +25,7 @@ class teleport::install {
     "${teleport::bin_dir}/tsh":
       ensure => link,
       target => "${teleport::extract_path}/teleport/tsh";
-    $teleport::data_dir:
+    $teleport::assets_dir:
       ensure => link,
       target => "${teleport::extract_path}/teleport/app"
   }

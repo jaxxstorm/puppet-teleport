@@ -16,8 +16,8 @@
 # [*bin_dir*]
 #  Where to symlink teleport binaries
 #
-# [*data_dir*]
-#  Where to sylink the teleport web data
+# [*assets_dir*]
+#  Where to sylink the teleport web assets
 #
 # [*nodename*]
 #  Teleport nodename. 
@@ -114,7 +114,7 @@ class teleport (
   $archive_path          = $teleport::params::archive_path,
   $extract_path          = $teleport::params::extract_path,
   $bin_dir               = $teleport::params::bin_dir,
-  $data_dir              = $teleport::params::data_dir,
+  $assets_dir            = $teleport::params::assets_dir,
   $nodename              = $teleport::params::nodename,
   $max_connections       = 1000,
   $max_users             = 250,
