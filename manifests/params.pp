@@ -8,7 +8,7 @@ class teleport::params {
   $archive_path    = '/tmp/teleport.tar.gz'
   $extract_path    = "/opt/teleport-${version}"
   $bin_dir         = '/usr/local/bin'
-  $assets_dir        = '/usr/local/share/teleport'
+  $assets_dir      = '/usr/local/share/teleport'
   $config_path     = '/etc/teleport.yaml'
   $nodename        = $::fqdn
 

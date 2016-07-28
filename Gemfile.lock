@@ -298,6 +298,7 @@ DEPENDENCIES
   hiera
   hiera-puppet-helper
   json
+  json_pure (~> 1.8.3)
   pry
   puppet (~> 3.7.0)
   puppet-blacksmith
