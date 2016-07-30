@@ -62,6 +62,9 @@ auth_service:
     - <%= token %>
 <% end -%>
 <% end -%>
+<% if ![:undef, nil].include?(scope.lookupvar("teleport::cluster_name")) -%>
+  cluster_name: <%= scope.lookupvar('teleport::cluster_name') %>
+<% end -%>
 
 # This section configures the 'node service':
 ssh_service:

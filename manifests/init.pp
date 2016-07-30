@@ -79,6 +79,10 @@
 #  The provisioning tokens for the auth tokens
 #  Defaults to an empty array
 #
+# [*cluster_name*]
+#  The cluster name. If none specified, uses a GUID
+#  Defaults to undef
+#
 # [*ssh_enable*]
 #  Whether to start SSH service
 #  Defaults to true
@@ -153,6 +157,7 @@ class teleport (
   $auth_listen_addr      = '127.0.0.1',
   $auth_listen_port      = '3025',
   $auth_service_tokens   = [],
+  $cluster_name          = undef,
   $ssh_enable            = true,
   $ssh_listen_addr       = '0.0.0.0',
   $ssh_listen_port       = '3022',
