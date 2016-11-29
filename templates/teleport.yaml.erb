@@ -45,7 +45,7 @@ teleport:
     output: <%= scope.lookupvar('teleport::log_dest') %>
     severity: <%= scope.lookupvar('teleport::log_level') %>
 
-<% if ![:undef, nil].include?(scope.lookupvar("teleport::backend")) -%>
+<% if ![:undef, nil].include?(scope.lookupvar("teleport::storage_backend")) -%>
   # Type of storage used for keys. You need to configure this to use etcd
   # backend if you want to run Teleport in HA configuration.  
   storage: 
