@@ -171,6 +171,14 @@ Port to listen on for auth server
 
 The provisioning tokens for the auth tokens
 
+#### `cluster_name` [String]
+
+An optional cluster name to assign to the cluster
+
+#### `trusted_clusters` [Hash]
+
+Specifies the other cluster to trust. Default: empty hash
+
 #### `ssh_enable` [String]
 
 Whether to start SSH service. Default: `true`

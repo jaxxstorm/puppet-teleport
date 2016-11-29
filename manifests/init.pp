@@ -83,6 +83,10 @@
 #  The cluster name. If none specified, uses a GUID
 #  Defaults to undef
 #
+# [*trusted_clusters*]
+#  A hash of keys for trusted_cluster config
+#  Defaults to an empty hash
+#
 # [*ssh_enable*]
 #  Whether to start SSH service
 #  Defaults to true
@@ -158,6 +162,7 @@ class teleport (
   $auth_listen_port      = '3025',
   $auth_service_tokens   = [],
   $cluster_name          = undef,
+  $trusted_clusters      = {},
   $ssh_enable            = true,
   $ssh_listen_addr       = '0.0.0.0',
   $ssh_listen_port       = '3022',
