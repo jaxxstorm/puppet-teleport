@@ -1,5 +1,7 @@
 # puppet-teleport
 
+[![Build Status](https://travis-ci.org/jaxxstorm/puppet-teleport.svg?branch=master)](https://travis-ci.org/jaxxstorm/puppet-teleport)
+
 #### Table of Contents
 
 1. [Module Description - What the module does and why it is useful](#module-description)
