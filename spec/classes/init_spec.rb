@@ -130,6 +130,24 @@ describe 'teleport' do
     it { should contain_file('/etc/teleport.yaml').with_content(/tokens:\n    - node:VMU0mF8GbN\n/) }
   end
 
+  context "set cluster name" do
+    let(:params) {{
+      :cluster_name => 'test-cluster'
+    }}
+    it { should contain_file('/etc/teleport.yaml').with_content(/  cluster_name: test-cluster/) }
+  end
+
+  context "set trusted clusters" do
+    let(:params) {{
+      :cluster_name => 'my-cluster',
+      :trusted_clusters => [ 
+        {'key_file' => '/etc/key', 'allow_logins' => 'john', 'tunnel_addr' => '6.6.6.6'}
+      ],
+    }}
+    it { should contain_file('/etc/teleport.yaml').with_content(/  cluster_name: my-cluster\n    - key_file: \/etc\/key    allow_logins: john    tunnel_addr: 6\.6\.6\.6/) }    
+  end
+
+
   ##### Service setup ####
   context "on unsupported operating system" do
     let (:facts) {{
@@ -171,7 +189,5 @@ describe 'teleport' do
   context "config file notifies service" do
     it { should contain_file('/etc/teleport.yaml').that_notifies('Service[teleport]') }
   end
-
-
 
 end
