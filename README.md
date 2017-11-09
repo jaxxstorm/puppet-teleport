@@ -82,10 +82,10 @@ Teleport has multiple [roles](http://gravitational.com/teleport/docs/architectur
   * [`teleport`](#teleport): Installs and configured teleport in your environment
 
 #### Private Classes
-  * [`teleport::install`]: Downloads the teleport binary and installs it in your env 
+  * [`teleport::install`]: Downloads the teleport binary and installs it in your env
   * [`teleport::config`]: Configure the service and the teleport config file
-  * [`teleport::service`]: Manage the teleport service 
-  
+  * [`teleport::service`]: Manage the teleport service
+
 
 ### `teleport`
 
@@ -129,7 +129,11 @@ When running in NAT'd environments, designates an IP for teleport to advertise.
 
 ##### `storage_backend` [String]
 
-Which storage backend to use. 
+Which storage backend to use.
+
+##### `storage_options` [String]
+
+Extra options for some storage backends, like DynamoDB.
 
 ##### `max_connections` [String]
 

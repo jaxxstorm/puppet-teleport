@@ -9,7 +9,7 @@ teleport:
   nodename: <%= scope.lookupvar('teleport::nodename') %>
 
 <% if ![:undef, nil].include?(scope.lookupvar("teleport::data_dir")) -%>
-  # Data directory where Teleport keeps its data, like keys/users for 
+  # Data directory where Teleport keeps its data, like keys/users for
   # authentication (if using the default BoltDB back-end)
   data_dir: <%= scope.lookupvar('teleport::data_dir') -%>
 <% end -%>
@@ -39,7 +39,7 @@ teleport:
     max_connections: <%= scope.lookupvar('teleport::max_connections') %>
     max_users: <%= scope.lookupvar('teleport::max_users') %>
 
-  # Logging configuration. Possible output values are 'stdout', 'stderr' and 
+  # Logging configuration. Possible output values are 'stdout', 'stderr' and
   # 'syslog'. Possible severity values are INFO, WARN and ERROR (default).
   log:
     output: <%= scope.lookupvar('teleport::log_dest') %>
@@ -47,9 +47,12 @@ teleport:
 
 <% if ![:undef, nil].include?(scope.lookupvar("teleport::storage_backend")) -%>
   # Type of storage used for keys. You need to configure this to use etcd
-  # backend if you want to run Teleport in HA configuration.  
-  storage: 
+  # backend if you want to run Teleport in HA configuration.
+  storage:
     type: <%= scope.lookupvar('teleport::storage_backend') %>
+<% scope.lookupvar('teleport::storage_options').sort.each do |key,value| -%>
+    <%= key %>: <%= value %>
+<% end -%>
 <% end -%>
 
 # This section configures the 'auth service':

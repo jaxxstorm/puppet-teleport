@@ -20,7 +20,7 @@
 #  Where to sylink the teleport web assets
 #
 # [*nodename*]
-#  Teleport nodename. 
+#  Teleport nodename.
 #  Defaults to $::fqdn fact
 #
 # [*data_dir*]
@@ -41,6 +41,10 @@
 #  Which storage backend to use.
 #  Defaults to undef (meaning teleport uses its
 #  default of boltdb
+#
+# [*storage_options*]
+#  Extra options for some storage backends, like DynamoDB.
+#  Defaults to {}
 #
 # [*max_connections*]
 #  Configure max connections for teleport
@@ -143,6 +147,7 @@ class teleport (
   $auth_token            = undef,
   $advertise_ip          = undef,
   $storage_backend       = undef,
+  $storage_options       = {},
   $max_connections       = 1000,
   $max_users             = 250,
   $log_dest              = 'stderr',
@@ -190,5 +195,3 @@ class teleport (
   anchor { 'teleport_final': }
 
 }
-
-
