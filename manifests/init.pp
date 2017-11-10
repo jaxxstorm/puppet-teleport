@@ -195,7 +195,7 @@
 class teleport (
   $version                  = $teleport::params::version,
   $archive_path             = $teleport::params::archive_path,
-  $extract_path             = $teleport::params::extract_path,
+  $extract_path             = "/opt/teleport-${version}",
   $bin_dir                  = $teleport::params::bin_dir,
   $assets_dir               = $teleport::params::assets_dir,
   $nodename                 = $teleport::params::nodename,
