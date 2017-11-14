@@ -131,7 +131,7 @@ ssh_service:
   # See "Labeling Nodes" section below for more information.
   commands:
 <% scope.lookupvar('teleport::ssh_label_commands').flatten.each do |command| -%>
-    - name: <%= command['arch'] %>
+    - name: <%= command['name'] %>
       command: <%= command['command'] %>
       period: <%= command['period'] %>
 <% end -%>
