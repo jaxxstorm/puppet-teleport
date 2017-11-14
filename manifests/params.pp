@@ -4,13 +4,25 @@
 # It sets variables according to platform
 class teleport::params {
 
-  $version         = 'v1.0.0'
-  $archive_path    = '/tmp/teleport.tar.gz'
-  $extract_path    = "/opt/teleport-${version}"
-  $bin_dir         = '/usr/local/bin'
-  $assets_dir      = '/usr/local/share/teleport'
-  $config_path     = '/etc/teleport.yaml'
-  $nodename        = $::fqdn
+  $version                  = 'v1.0.0'
+  $archive_path             = '/tmp/teleport.tar.gz'
+  $bin_dir                  = '/usr/local/bin'
+  $assets_dir               = '/usr/local/share/teleport'
+  $config_path              = '/etc/teleport.yaml'
+  $nodename                 = $::fqdn
+  $auth_type                = 'local'
+  $auth_second_factor       = 'otp'
+  $auth_u2f_app_id          = 'https://localhost:3080'
+  $auth_u2f_facets          = ['https://localhost:3080']
+  $auth_cluster_name        = undef
+  $ssh_label_commands       = [{
+    name    => 'arch',
+    command => '[uname, -p]',
+    period  => '1h0m0s',
+  }]
+  $ssh_permit_user_env      = false
+  $proxy_tunnel_listen_addr = '127.0.0.1'
+  $proxy_tunnel_listen_port = '3024'
 
   case $::operatingsystem {
     'RedHat', 'CentOS': {
