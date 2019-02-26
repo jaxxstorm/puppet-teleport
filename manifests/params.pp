@@ -4,7 +4,7 @@
 # It sets variables according to platform
 class teleport::params {
 
-  $version                  = 'v1.0.0'
+  $version                  = '3.1.7'
   $archive_path             = '/tmp/teleport.tar.gz'
   $bin_dir                  = '/usr/local/bin'
   $assets_dir               = '/usr/local/share/teleport'
